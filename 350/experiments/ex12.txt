@@ -1,0 +1,57 @@
+Amber Dean
+analysis:
+can i use them like normal directories/files.  yes? mostly? i can't say for certain but they reacted
+normally in the use cases i tested.  I was expecting that cding into a linked directory would set my
+working directory path to the path of the linked directory, but it behaved as a regular child of the
+linked directory's parent.  I could indeed use a cyclic path name with the recursively linked
+directory and it treated it normally.  ls -R did not infinitely loop. it didn't even loop once, so 
+whatever checking the have in place is pretty rigorous.
+
+
+
+commands:
+ln -s /../usr/class/cos350 linktest
+ls linktest
+>archive  exps   prog2  prog4  prog6          submit
+>bin      prog1  prog3  prog5  scriptCleaner
+
+cd ..
+^takes me back to the previous directory, not cos350's parent.
+
+ln linktest/exps/l7/words wordlink
+^gave cross-device error
+
+ln -s linktest/exps/l7/words wordlink
+grep 'hi$' wordlink
+bronchi
+chi
+Delhi
+Delphi
+hi
+hibachi
+Hiroshi
+Hitachi
+Karachi
+Kobayashi
+phi
+sushi
+
+
+mkdir recursion
+cd recursion
+ln -s .. recursion
+cd ..
+ls -R recursion
+>recursion/:
+>recursion
+
+cd recursion/recursion/linktest
+ls
+>archive  exps   prog2  prog4  prog6          submit
+>bin      prog1  prog3  prog5  scriptCleaner
+
+
+
+
+
+
