@@ -1,0 +1,10 @@
+Amber Dean
+
+As far as I can tell, the permissions work in a priority system, however it may be implemented.
+I imagine the simplest way would be to go through the permissions from broadest to narrowest set a flag for if 
+the current requester is allowed access.  this way, if you are the owner of a user access only file, 
+even thought you are technically part of both the group and other categories, because the user permission 
+is checked last it will always overwrite any false set flags from previous checks. this also would be consistent with 
+the 007 mode where even though as part of "everyone" you should have access, that approval gets overwritten with the
+denial of group and user.  i cant say exactly how it was implemented but it effectively gives priority to the user 
+permission check either way. 

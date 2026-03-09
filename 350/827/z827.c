@@ -61,13 +61,27 @@ int main(int argc, char* argv[]){
 
 
     //COMPRESSION ALGO
-    unsigned int buf = 0;
+    unsigned int buf1 = 0;
+    unsigned int buf2 = 0;
+
     unsigned int filesizebyte = lseek(fileloc, 0 ,SEEK_END);
+    int offset = 7;
     if(!decompress){
         int newfileloc = creat(strcat(argv[1], ".z827"), O_WRONLY);
-        write(newfileloc, filesizebyte, 1);
+        write(newfileloc, &filesizebyte, 1);
+        read(fileloc, &buf1, 1);
         for(int i = 0; i < filesizebyte; i++){
-            
+            read(fileloc, &buf2, 1);
+            buf2 = buf2 << offset;
+            buf1 = buf1 | buf2;
+            write(newfileloc, &buf1, 1);
+            buf1 = buf1 >> 8;
+            offset += -1;
+            if (offset==0){
+                offset = 7;
+                read(fileloc, &buf1, 1);
+                i++;
+            }
         }
     }
     //TESTING
