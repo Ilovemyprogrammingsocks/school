@@ -1,0 +1,9 @@
+Amber Dean
+
+I by chance used "logout" in a PuTTY terminal in impulse and it worked,
+also I didnt realise you wanted this before class, so I apologize if its late
+(the due date was for midnight)
+What prompted me to try it was a probably unfounded feeling of vulnerability from
+externally closing my PuTTY terminal and potentially not "logging out" from my session
+since then our class has covered some terminal protocols which made me realize that closing
+the window externally likely had a very similar effect.
