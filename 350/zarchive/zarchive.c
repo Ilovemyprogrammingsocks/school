@@ -2,7 +2,21 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-//format of zarchive [ c|x ] "archive-name"
+struct header {
+	unsigned int uid; // uid of the archive owner (fron getuid())
+	char owner[64]; // username of the archive owner
+	unsigned int n_files; // the number of files in the archive
+};
+
+struct file {
+	size_t size; // size of file in bytes
+	time_t timestamp; // unix modification time of the file
+	char file_name[256]; // name of file, zero padded
+  	unsigned int options; // bit 0 is set if z827 compressed, 0 otherwise
+					// other bits are unused.
+};
+
+//format of >zarchive [c|x] "archive-name" --extractdest
 int main(int argc, char* argv[]){
 
 	//argument checking
@@ -10,7 +24,7 @@ int main(int argc, char* argv[]){
 	if(argc < 2){
 		printf("Error: Not enough arguments");
 		return 1;
-	}else if(arg c > 3){
+	}else if(argc > 3 && (argv[1] != "c")){
 		printf("Error: Too many arguments");
 		return 1; 
 	}else if(argc == 3){

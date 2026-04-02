@@ -1,0 +1,16 @@
+Amber Dean
+
+SIGINT results:
+nothing happened immediately, but running ps i found it listed as an interupted program.
+
+SIGFPE results:
+again, nothing in console immediately, which I suppose is expected, now that I think about it.
+running ps again shows the program listed under floating point exception.
+
+SIGKILL results:
+similar to the first two, but now listed as "killed"
+
+SIGCHLD results:
+this one was unexpected, I remember in class you said that without a signal handler (which my program doesnt have) that processes automatically terminate on any signal, but maybe i'm misremembering.  Either case, the program did not terminate, and did nothing at all really. I assume it recieved a signal telling it a non-existant child process changed state.
+
+I understand why you wanted us to clean up at the end now.

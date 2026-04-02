@@ -1,0 +1,25 @@
+Amber Dean
+
+Sec:1775075808 USec:735933
+Sec:1775075808 USec:736933
+Sec:1775075808 USec:737933
+Sec:1775075808 USec:738933
+Sec:1775075808 USec:739933
+Sec:1775075808 USec:740933
+Sec:1775075808 USec:741933
+Sec:1775075808 USec:742933
+Sec:1775075808 USec:743933
+Sec:1775075808 USec:744933
+Sec:1775075808 USec:745934<
+Sec:1775075808 USec:746934<
+Sec:1775075808 USec:747933
+Sec:1775075808 USec:748933
+Sec:1775075808 USec:749934<
+
+
+
+this is a snippet of my programs output
+all in all, fairly accurate to the 1000 micro second window.
+however, at several marked lines, it was off by a micro second, and then fixed itself shortly after.
+this pattern was consistent across the enirety of the output, so i would say that the timer is mostly accurate with less than .1% variance
+
