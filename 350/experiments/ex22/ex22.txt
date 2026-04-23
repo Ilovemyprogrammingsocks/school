@@ -1,0 +1,7 @@
+#!/bin/bash
+./a.out >> fireball.txt &
+while [ 1 ]
+do
+sleep 1
+echo "aaaaaaaaaaaaaaaaaaaaaaaaaaa" >> fireball.txt	
+done

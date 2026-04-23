@@ -1,0 +1,6 @@
+Amber Dean
+
+ps lists 3, and ps aux lists 312 total, and 108 in my user.
+Because I am the superuser on my computer, I think many of these are system started processes that may have inherited my name.
+I was aware of a handful of these processes before using ps, 
+like the ones labeled "firefox" and the "pipe" command, but I can't explain a majority of them.
