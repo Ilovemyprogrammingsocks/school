@@ -3,4 +3,4 @@
 git add *
 git commit
 branch=git branch
-git push remote $branch
+git push origin $branch
