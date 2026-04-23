@@ -2,5 +2,5 @@
 
 git add *
 git commit
-branch=git branch
+branch=git rev-parse --abbrev-ref HEAD
 git push origin $branch
