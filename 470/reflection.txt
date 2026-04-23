@@ -1,0 +1,46 @@
+I really dislike strings, string comparisons, and manual array management.
+its generally very precise, but inconsistent in implementation, and difficult to trouble shoot because they are such large structures compared to other data types and inconsitencies can be very relitively small while still heavily impactful
+
+I do enjoy building logic structures and designing programs, making sure each branch reaches all it's ends
+
+Senior IT/Buisness networks/LAN tech
+
+software engineer/designer
+
+database maintainer/designer
+
+
+skill inventory
+3 strengths
+- networks experience
+- experience with and understanding of computer hardware
+- low level coding experience
+
+gaps
+- few coding projects or projects in general
+- not much experience with high level or abstracted languages
+- no leadership experience
+
+projects
+-tarball equivalent
+-built pc and custom formatted the hard drive, performs maintenance 
+- cyber deck in future?
+
+gap closing
+- learn python & lack of projects -> write a game in python
+- lack of projects -> cyberdeck
+- leadership experience -> accept promotion at lowes?
+
+
+timeline
+0-3 months
+-summer
+-work on some projects, build up my github
+6-12 months
+-if close to graduating, start applying to jobs
+-if not, look to cement and maybe advance position at lowes
+-look for leadership opportunity
+2-5 years
+-should have a job in the industry at this point, look to advance in field
+or rotate to a more attractive posistion 
+-build work experience and improve portfolio

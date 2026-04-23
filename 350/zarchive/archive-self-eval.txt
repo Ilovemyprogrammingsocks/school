@@ -1,0 +1,39 @@
+Archive Compression Self-evaluation
+
+Name:
+
+Ask for archive name (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Make sure archive does not exist (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Get user's name (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Show list of files to archive (25pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Ask for files to archive (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Archive the list of files (15pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Archive with * (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Show final contents of archive (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Makefile (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Unarchive file (15pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+Error handling (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented
+
+z827 compression (5pts)
+	_ works  _ mostly works _ sometimes works _ not implemented

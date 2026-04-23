@@ -1,0 +1,16 @@
+#!/bin/bash
+while [ 1 ]
+do
+sleep 2
+echo "ooga booga"
+done
+
+
+
+
+#Amber Dean
+#I guess this is technically my first shell script?
+#I feel like anything i would have learned I already knew from lecture
+#it was good review, because I had to look up some things, like the loop
+#syntax, but I dont know how you would classify that. It worked the first time
+#so i didnt even have to troubleshoot
