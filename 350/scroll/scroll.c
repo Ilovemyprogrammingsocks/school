@@ -11,6 +11,7 @@
 
 //buffer
 char* buf;
+long int bufsize;
 
 //window size variables
 int win_r;
@@ -29,11 +30,8 @@ int spdctl(int control){
 	struct timeval t;
 	t.tv_sec = 0;
 	if(control == 0){
-		speed = 0;
-		alarm(0);
-	} else if(control > 0){
 		if(speed <= 0){
-			speed = 3000000;
+			speed = 1000000;
 			t.tv_usec = speed;
 			if(speed >= 1000000){
 				t.tv_sec = speed / 1000000;
@@ -44,17 +42,20 @@ int spdctl(int control){
 			tt.it_value = t;
 			setitimer(ITIMER_REAL, &tt, NULL);
 		}else{
-			speed = speed * 1.2;
-			t.tv_usec = speed;
-			if(speed >= 1000000){
-				t.tv_sec = speed / 1000000;
-				t.tv_usec = speed % 1000000;
-			}
-			struct itimerval tt;
-			tt.it_interval = t;
-			tt.it_value = t;
-			setitimer(ITIMER_REAL, &tt, NULL); 
+			speed = 0;
+			alarm(0);
 		}
+	} else if(control > 0){	
+		speed = speed * 1.2;
+		t.tv_usec = speed;
+		if(speed >= 1000000){
+			t.tv_sec = speed / 1000000;
+			t.tv_usec = speed % 1000000;
+		}
+		struct itimerval tt;
+		tt.it_interval = t;
+		tt.it_value = t;
+		setitimer(ITIMER_REAL, &tt, NULL); 
 	}else{
 		speed = speed * 0.8;
 		t.tv_usec = speed;
@@ -83,15 +84,58 @@ void cleanexit(){
 
 //reprints buf and increments the bookmarks
 void next(){
+	//to ensure that the first line isnt appended to anything, especially the tooltip
 	printf("\n");
-	for(int i = bufbeg;i <= bufend; i+= win_c){
-		for(int j = i; i < win_c; j++){
-			printf("%c", buf[j]);
+
+	//loop to print most of screen
+		//EOF flag
+	int flag = 0;
+		//characters since last /n counter
+	int lastncnt = 0;
+		//count of first line/flag for having past the firstline
+	int firstlnlen = 0;
+	bufend = ((win_r-1)*(win_c-1));
+	for(int i=bufbeg; i < (bufbeg + bufend); i++){
+		if(i >= bufsize){
+			flag = 1;	
 		}
+		if(!flag){	
+			if(buf[i]!= '\t'){
+				printf("%c", buf[i]);
+			}else{
+				printf("\\t");
+				lastncnt++;
+			}
+			if(buf[i]!='\n'){
+				lastncnt++;
+			}else{
+				if(!firstlnlen){
+					firstlnlen = lastncnt;
+				}
+				bufend-= (win_c - lastncnt); 
+				lastncnt = 0;
+			}
+		}else{printf("t"); lastncnt++;}
+		if(((lastncnt)%win_c)==0 && (lastncnt!=0)){
+			if(!firstlnlen){
+				firstlnlen = lastncnt;
+			}
+			printf("\n");
+			lastncnt = 0;
+		}
+		
+	}
+	if(lastncnt !=0){
 		printf("\n");
 	}
 	printf("%s", tooltip);
 	fflush(stdout);
+	//doesnt move forward if at end of file
+	if(!flag){
+		bufbeg+= firstlnlen;
+	}else{
+		spdctl(0);
+	}
 	return;
 }
 
@@ -113,8 +157,15 @@ int main(int argc, char *argv[]){
 	buf = malloc(filestat.st_size);
 	if(buf == NULL){error("malloc failure\n");}
 	FILE* file = fopen(argv[1], "r");
-	fread(buf, sizeof(char), filestat.st_size, file);
-
+	if(fread(buf, sizeof(char), filestat.st_size, file)==-1){error("couldn't read file");}
+	bufsize = filestat.st_size;
+	
+	
+		//BUF TEST
+//	printf("%ld", bufsize);
+//	printf("%s", buf);
+//	return 1;
+	
 	//need TWO handlers, one for SIGINT, and one for SIGALRM
 	signal(SIGALRM, next);
 	signal(SIGINT, cleanexit);
@@ -137,7 +188,7 @@ int main(int argc, char *argv[]){
 	tcsetattr(0, 0, &tsettings);
 	
 	//start the timer
-	spdctl(1);
+	spdctl(0);
 	char key;
 	while(scanf("%c", &key)){
 		if(key == 'q'){
@@ -156,7 +207,9 @@ int main(int argc, char *argv[]){
 			for(int i=0; i < win_r-1;i++){
 				next();
 			}
-			spdctl(0);
+			if(speed != 0){
+				spdctl(0);
+			}
 		}
 	}
 	cleanexit();
