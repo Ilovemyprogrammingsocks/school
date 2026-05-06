@@ -1,0 +1,12 @@
+get and use current window size					x
+set terminal parameters if neccesary (turn off echoing)		x
+keep a prompt at the bottom of the terminal			
+calculate and divide long lines into appropriate chunks		
+reset parameters to default on exit				x
+makefile 							x
+
+
+bonus:
+stdin case handling
+add tab character expansion and exception handling
+error handling (MARK AS TODO WHEN LEFT FOR LATER)
