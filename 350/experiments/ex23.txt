@@ -1,0 +1,14 @@
+Amber Dean
+EX23
+
+well i think a couple things happened
+one is that the child stopped responding to ^C.  
+I dont know if it was technically a zombie or not, but the parent completed its task, 
+and I assume it didn't wait for the child, so it terminated, 
+and left the child running without any parent to pass interrupt signals through
+
+another behavior i noticed was that if the child took too long to start taking input,
+the parent would conclude and seemingly close the pipe before the child ever got it, leaving the child
+potentially running without a stdin or out.  I cant 100% confirm this, because without fixing the error,
+I cant manually debug anything, and I am not very competent with the default debugging tools.
+
