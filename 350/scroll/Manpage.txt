@@ -1,0 +1,56 @@
+SCROLL				User Program
+
+NAME
+	scroll - automatically scroll through a text file and display contents
+
+SYNOPSIS
+	./scroll _file_
+
+DESCRIPTION
+	scroll is a program to gradually present the contents of a text file with some user control over the speed of the presentation.  This is a barebones program with only basic error handling and several cosmetic issues, which verge into functional issues due to the cosmetic nature of the program.
+
+COMMANDS
+	Commands are entered via keypress during runtime, and are recieved unbuffered, so take care not to mispress.  unimplemented characters entered are ignored
+
+	q
+		quit: cleanly exits the program resetting the echo and canonical recording terminal settings
+	
+	return
+		pause/resume: stops scrolling indefinitely until another return signal is processed.  resuming from a stand still will set scroll speed to default
+
+	spacebar
+		skip: skips forward one page and pauses, meant to emulate MORE(1) style scrolling.  can resume with a return.
+
+	f
+		faster: speeds up scroll speed by 20% current speed, has no effect if paused
+	
+	s
+		slower: slows scroll speed by 20% current speed, has no effect if paused
+	
+
+ENVIRONMENT
+	this program uses and overwrites the following environment variables
+
+	ITIMER_REAL
+		used by setitimer() and alarm
+
+	terminal ECHO and ICANON flag bits
+
+HISTORY
+	this is one program among many designed to comply with a set of specifications from Professor Stephen Houser's COS 350 class
+
+AUTHORS
+	Amber Dean, USM
+
+	Program specifications from Stephen Houser, USM
+
+SEE ALSO
+	more(1)
+
+REPORTING BUGS
+	don't.  I know they exist.  I would advise against it, but if you intend to use this program seriously, I would reccomend making your own improvements.  I will likely not update this program further.
+ 	
+AVAILIBILITY
+	this program is availible in my <school> github repository @ user ILoveMyProgrammingSocks
+
+2026-5-7

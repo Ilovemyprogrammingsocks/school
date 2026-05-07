@@ -1,3 +1,5 @@
+//Amber Dean
+
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <stdlib.h>
@@ -79,10 +81,10 @@ void cleanexit(){
 	tsettings.c_lflag |= ECHO;
 	tsettings.c_lflag |= ICANON;
 	tcsetattr(0, 0, &tsettings);
+	printf("\n");
 	exit(0);
 }
 
-//reprints buf and increments the bookmarks
 void next(){
 	//to ensure that the first line isnt appended to anything, especially the tooltip
 	printf("\n");
@@ -117,7 +119,7 @@ void next(){
 				if(!firstlnlen){
 					firstlnlen = lastlncnt;
 				}
-				lastncnt--;
+				lastncnt-= 2;
 				bufend -= (win_c - lastncnt);
 				lastncnt = lastlncnt = 0;
 			}
@@ -144,7 +146,6 @@ void next(){
 	}
 	return;
 }
-
 
 //error thrower
 void error(char *ermsg){
