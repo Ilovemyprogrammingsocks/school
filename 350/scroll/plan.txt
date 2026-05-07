@@ -10,3 +10,13 @@ bonus:
 stdin case handling
 add tab character expansion and exception handling
 error handling (MARK AS TODO WHEN LEFT FOR LATER)
+
+
+
+
+
+loop design
+axioms:
+bufbeg=0
+bufend=win_r-1*win_c
+

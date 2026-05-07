@@ -89,49 +89,55 @@ void next(){
 
 	//loop to print most of screen
 		//EOF flag
-	int flag = 0;
-		//characters since last /n counter
+	int eofflag = 0;
+		//characters since last \n to track location on screen
 	int lastncnt = 0;
+		//tracks how many characters have actually been read
+	int lastlncnt = 0;
 		//count of first line/flag for having past the firstline
 	int firstlnlen = 0;
-	bufend = ((win_r-1)*(win_c-1));
-	for(int i=bufbeg; i < (bufbeg + bufend); i++){
-		if(i >= bufsize){
-			flag = 1;	
+	bufend = ((win_r-1)*(win_c));
+	for(int i = bufbeg; i < (bufbeg + bufend); i++){
+		if(i > bufsize){
+			eofflag = 1;
 		}
-		if(!flag){	
-			if(buf[i]!= '\t'){
-				printf("%c", buf[i]);
-			}else{
+		if(eofflag){
+			printf(" ");
+			lastncnt++;
+		}else{
+			if(buf[i]=='\t'){
 				printf("\\t");
 				lastncnt++;
-			}
-			if(buf[i]!='\n'){
-				lastncnt++;
 			}else{
-				if(!firstlnlen){
-					firstlnlen = lastncnt;
-				}
-				bufend-= (win_c - lastncnt); 
-				lastncnt = 0;
+				printf("%c", buf[i]);
 			}
-		}else{printf("t"); lastncnt++;}
-		if(((lastncnt)%win_c)==0 && (lastncnt!=0)){
+			lastncnt++;
+			lastlncnt++;
+			if(buf[i] == '\n'){
+				if(!firstlnlen){
+					firstlnlen = lastlncnt;
+				}
+				lastncnt--;
+				bufend -= (win_c - lastncnt);
+				lastncnt = lastlncnt = 0;
+			}
+		}
+		if(((lastncnt%win_c)==0) && (lastncnt!=0)){
 			if(!firstlnlen){
-				firstlnlen = lastncnt;
+				firstlnlen = lastlncnt;
 			}
 			printf("\n");
-			lastncnt = 0;
+			lastncnt = lastlncnt = 0;
 		}
-		
 	}
+
 	if(lastncnt !=0){
 		printf("\n");
 	}
 	printf("%s", tooltip);
 	fflush(stdout);
 	//doesnt move forward if at end of file
-	if(!flag){
+	if(!eofflag){
 		bufbeg+= firstlnlen;
 	}else{
 		spdctl(0);
@@ -177,8 +183,6 @@ int main(int argc, char *argv[]){
 		win_c = sbuf.ws_col;
 	}else{error("ioctl failure\n");}
 	if(strlen(tooltip) > win_c){error("window too small\n");}
-	
-	bufend = (win_r-1 * win_c)-1;
 
 	//turn off echoing and canonical terminal
 	struct termios tsettings;
